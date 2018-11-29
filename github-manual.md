@@ -2,10 +2,25 @@
 
 This manual tells you how to create a new Github repository with your project and how to set up GIT in your IDEA Community Edition.
 
+# Before training
+
+You don't need to worry about GIT before the training. You only need to import this project into your IntelliJ IDEA.
+
+1. Go to [repository](https://github.com/cngroupdk/cnu-zlin-homework).
+2. Click on the green Clone or download button and select Download ZIP
+3. Extract the ZIP somewhere on your computer.
+4. In IntelliJ IDEA, click on File -> New -> Project with existing sources and navigate to your folder
+5. In the dialog, select Import project from external model and select Gradle
+6. In the next screen, click on Use auto import
+
+Now you should be ready for the training. If you have any issues with this process, don't worry, we will have some time to resolve it before the training, but it is better if you come prepared.
+
+# After training
+
 ## Github repository
 
 1. Create a [Github account](https://github.com/join), don't worry, it's free! Login to this account.
-2. View the [CNU Rover repository](https://github.com/Wrent/cnu-mars-rover) (TODO change to CN link)
+2. View the [CNU Rover repository](https://github.com/cngroupdk/cnu-zlin-homework)
 3. Click on the Fork button in the top right corner. This will create a copy of this repository in your account,
 where you can continue with development of your homework without influencing the others.
 
