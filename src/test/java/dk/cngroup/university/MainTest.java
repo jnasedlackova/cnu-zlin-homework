@@ -1,10 +1,10 @@
 package dk.cngroup.university;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class MainTest {
+class MainTest {
 
 	@Test
-	public void main() {
+	void main() {
 	}
 }
