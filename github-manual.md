@@ -12,6 +12,7 @@ You don't need to worry about GIT before the training. You only need to import t
 4. In IntelliJ IDEA, click on File -> New -> Project with existing sources and navigate to your folder
 5. In the dialog, select Import project from external model and select Gradle
 6. In the next screen, click on Use auto import
+7. Let everything finish and then test the setup by right clicking on test folder and selecting Run all tests. A new panel should open informing you, that all (one) tests passed.
 
 Now you should be ready for the training. If you have any issues with this process, don't worry, we will have some time to resolve it before the training, but it is better if you come prepared.
 
