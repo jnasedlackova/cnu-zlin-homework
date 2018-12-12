@@ -12,7 +12,7 @@ public class Landscape {
 	}
 
 	public boolean isAccessible(Position position){
-		return false;
+		return true; // TODO implement
 	}
 
 	@Override

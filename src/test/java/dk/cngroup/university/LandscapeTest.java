@@ -30,5 +30,6 @@ class LandscapeTest {
 
 	@Test
 	void isAccessible() {
+		// TODO implement (more variants)
 	}
 }
