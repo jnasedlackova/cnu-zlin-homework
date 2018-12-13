@@ -10,6 +10,6 @@ class PositionTest {
 	void getNeighbourSouth() {
 		Position position = new Position(0, 0);
 		Position result = position.getNeighbour(Direction.SOUTH);
-		assertEquals(new Position(1,0), result, "New position is 1,0");
+		assertEquals(new Position(1,0), result, "New position should be 1,0");
 	}
 }
