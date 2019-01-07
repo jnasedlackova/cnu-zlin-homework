@@ -46,6 +46,26 @@ class DirectionTest {
         testTurnLeft(Direction.NORTH, Direction.WEST, "West should be left of north");
     }
 
+    @Test
+    void testOpositeDirectionEast() {
+        testOpositeDirection(Direction.EAST, Direction.WEST, "West is oposite to East");
+    }
+
+    @Test
+    void testOpositeDirectionSouth() {
+        testOpositeDirection(Direction.SOUTH, Direction.NORTH, "North is oposite to South");
+    }
+
+    @Test
+    void testOpositeDirectionWest() {
+        testOpositeDirection(Direction.WEST, Direction.EAST, "East is oposite to West");
+    }
+
+    @Test
+    void testOpositeDirectionNorth() {
+        testOpositeDirection(Direction.NORTH, Direction.SOUTH, "South is oposite to North");
+    }
+
 	private void testTurnRight(Direction input, Direction expected, String message) {
 		Direction result = input.getDirectionOnRight();
 		assertEquals(expected, result, message);
@@ -53,6 +73,11 @@ class DirectionTest {
 
     private void testTurnLeft(Direction input, Direction expected, String message) {
         Direction result = input.getDirectionOnLeft();
+        assertEquals(expected, result, message);
+    }
+
+    private void testOpositeDirection(Direction input, Direction expected, String message) {
+        Direction result = input.getOpositeDirection();
         assertEquals(expected, result, message);
     }
 }

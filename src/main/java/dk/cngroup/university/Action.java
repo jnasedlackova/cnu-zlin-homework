@@ -4,13 +4,17 @@ public enum Action {
 	RIGHT{
 		@Override
 		public Rover perform(Rover rover, Landscape landscape) {
-			return null;
+            Direction direction = rover.getDirection().getDirectionOnRight();
+            Position position = rover.getPosition();
+            return new Rover(direction, position);
 		}
 	},
 	LEFT {
 		@Override
 		public Rover perform(Rover rover, Landscape landscape) {
-			return null;
+            Direction direction = rover.getDirection().getDirectionOnLeft();
+            Position position = rover.getPosition();
+            return new Rover(direction, position);
 		}
 	},
 	FORWARD {
@@ -28,7 +32,14 @@ public enum Action {
 	BACKWARD {
 		@Override
 		public Rover perform(Rover rover, Landscape landscape) {
-			return null;
+            Direction direction = rover.getDirection();
+            Direction opositeDirection = direction.getOpositeDirection();
+            Position position =
+                    rover.getPosition().getNeighbour(opositeDirection);
+            if (landscape.isAccessible(position)) {
+                return new Rover(direction, position);
+            }
+            return rover;
 		}
 	};
 

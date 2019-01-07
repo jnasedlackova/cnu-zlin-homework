@@ -11,6 +11,11 @@ public enum Direction {
 		Direction getDirectionOnLeft() {
 			return WEST;
 		}
+
+		@Override
+		Direction getOpositeDirection() {
+			return SOUTH;
+		}
 	},
 	SOUTH {
 		@Override
@@ -21,6 +26,11 @@ public enum Direction {
 		@Override
 		Direction getDirectionOnLeft() {
 			return EAST;
+		}
+
+		@Override
+		Direction getOpositeDirection() {
+			return NORTH;
 		}
 
 	},
@@ -34,6 +44,11 @@ public enum Direction {
 		Direction getDirectionOnLeft() {
 			return SOUTH;
 		}
+
+		@Override
+		Direction getOpositeDirection() {
+			return EAST;
+		}
 	},
 	EAST {
 		@Override
@@ -45,10 +60,17 @@ public enum Direction {
 		Direction getDirectionOnLeft() {
 			return NORTH;
 		}
+
+		@Override
+		Direction getOpositeDirection() {
+			return WEST;
+		}
 	};
 
 	abstract Direction getDirectionOnRight();
 
 	abstract Direction getDirectionOnLeft();
+
+	abstract Direction getOpositeDirection();
 
 }
