@@ -1,6 +1,5 @@
 package dk.cngroup.university;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Landscape {
@@ -12,7 +11,10 @@ public class Landscape {
 	}
 
 	public boolean isAccessible(Position position){
-		return true; // TODO implement
+        Field field = fields[position.x][position.y];
+        if (field.toString().equals("."))
+            return true;
+        else return false;
 	}
 
 	@Override

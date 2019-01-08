@@ -3,10 +3,9 @@ package dk.cngroup.university;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LandscapeTest {
 
@@ -29,7 +28,25 @@ class LandscapeTest {
 	}
 
 	@Test
-	void isAccessible() {
-		// TODO implement (more variants)
+	void testIsAccessible() {
+		List<Position> stones = new ArrayList<>();
+		stones.add(new Position(0, 0));
+		Landscape landscape = new Landscape(2, stones);
+		Position position = new Position(1, 0);
+		boolean result = landscape.isAccessible(position);
+		boolean expected = true;
+		assertEquals(expected, result, "The result should be true, stone is not at this position");
 	}
+
+	@Test
+	void testIsNotAccessible() {
+		List<Position> stones = new ArrayList<>();
+		stones.add(new Position(0, 0));
+		Landscape landscape = new Landscape(2, stones);
+		boolean result = landscape.isAccessible(new Position(0, 0));
+		boolean expected = false;
+		assertEquals(expected, result, "The result should be false, stone is at this position");
+	}
+
+
 }
