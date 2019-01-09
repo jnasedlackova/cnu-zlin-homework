@@ -29,7 +29,7 @@ class InputParserTest {
                 "4,1\n" +
                 "\n" +
                 "RRFLFRFF";
-        List<String> result = InputParser.parseString(input);
+        List<String> result = InputParser.parseInputString(input);
 
         assertEquals(expected, result,
                 "Both Lists should be the same");
@@ -46,9 +46,9 @@ class InputParserTest {
         input.add("RRFLFRFF");
 
         Rover result = InputParser.parseRover(input);
-        Rover expeted = new Rover(Direction.SOUTH, new Position(1, 0));
+        Rover expected = new Rover(Direction.SOUTH, new Position(1, 0));
 
-        assertEquals(expeted, result,
+        assertEquals(expected, result,
                 "Rovers should be the same");
     }
 
@@ -63,10 +63,84 @@ class InputParserTest {
         input.add("RRFLFRFF");
 
         Rover result = InputParser.parseRover(input);
-        Rover expeted = new Rover(Direction.WEST, new Position(4, 2));
+        Rover expected = new Rover(Direction.WEST, new Position(4, 2));
 
-        assertEquals(expeted, result,
+        assertEquals(expected, result,
                 "Rovers should be the same");
+    }
+
+    @Test
+    void testParseLandscapeSize2WithOneStone() {
+        List<String> input = new ArrayList<>();
+        input.add("0,1");
+        input.add("W");
+        input.add("2");
+        input.add("0,0");
+        input.add("1,1");
+        input.add("RRFLFRFF");
+
+        String result = InputParser.parseLandscape(input).toString();
+        String expected = "0.\n..\n";
+
+        assertEquals(expected, result,
+                "Landscapes should be the same");
+    }
+
+    @Test
+    void testParseLandscapeSize5WithFourStones() {
+        List<String> input = new ArrayList<>();
+        input.add("4,2");
+        input.add("W");
+        input.add("5");
+        input.add("3,0;1,3;4,3;1,0");
+        input.add("4,1");
+        input.add("RRFLFRFF");
+
+        String result = InputParser.parseLandscape(input).toString();
+        String expected = ".....\n0..0.\n.....\n0....\n...0.\n";
+
+        assertEquals(expected, result,
+                "Landscapes should be the same");
+    }
+
+    @Test
+    void testParseFinalDestination() {
+        List<String> input = new ArrayList<>();
+        input.add("0,1");
+        input.add("W");
+        input.add("2");
+        input.add("0,0");
+        input.add("1,1");
+        input.add("RRFLFRFF");
+
+        Position expected = new Position(1, 1);
+        Position result = InputParser.parseFinalDestination(input);
+
+        assertEquals(expected, result,
+                "Positions should be the same");
+    }
+
+    @Test
+    void testParseCommands() {
+        List<String> input = new ArrayList<>();
+        input.add("0,1");
+        input.add("W");
+        input.add("2");
+        input.add("0,0");
+        input.add("1,1");
+        input.add("RLFRB");
+
+        List<Action> expected = new ArrayList<>();
+        expected.add(Action.RIGHT);
+        expected.add(Action.LEFT);
+        expected.add(Action.FORWARD);
+        expected.add(Action.RIGHT);
+        expected.add(Action.BACKWARD);
+
+        List<Action> result = InputParser.parseCommands(input);
+
+        assertEquals(expected, result,
+                "Actions should be the same");
     }
 
 }
