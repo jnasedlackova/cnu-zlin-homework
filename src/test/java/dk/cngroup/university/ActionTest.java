@@ -70,11 +70,11 @@ class ActionTest {
 
     @Test
     void performLeft() {
-        Action right = Action.LEFT;
+        Action left = Action.LEFT;
         Rover rover = new Rover(Direction.NORTH, new Position(0, 0));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = right.perform(rover, landscape);
+        Rover result = left.perform(rover, landscape);
         Rover expected = new Rover(Direction.WEST, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
