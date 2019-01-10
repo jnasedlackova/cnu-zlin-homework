@@ -15,7 +15,7 @@ class ActionTest {
 		Rover rover = new Rover(Direction.SOUTH, new Position(0,0));
 		Landscape landscape = new Landscape(2, new ArrayList<>());
 
-		Rover result = forward.perform(rover, landscape);
+        Rover result = forward.perform(rover, landscape, 0);
 		Rover expected = new Rover(Direction.SOUTH, new Position(1,0));
 		assertEquals(expected, result, "Rover should be equal");
 	}
@@ -28,7 +28,7 @@ class ActionTest {
         stones.add(new Position(1, 0));
         Landscape landscape = new Landscape(2, stones);
 
-        Rover result = forward.perform(rover, landscape);
+        Rover result = forward.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.SOUTH, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -39,7 +39,7 @@ class ActionTest {
         Rover rover = new Rover(Direction.NORTH, new Position(0, 0));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = backward.perform(rover, landscape);
+        Rover result = backward.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.NORTH, new Position(1, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -52,7 +52,7 @@ class ActionTest {
         stones.add(new Position(1, 0));
         Landscape landscape = new Landscape(2, stones);
 
-        Rover result = backward.perform(rover, landscape);
+        Rover result = backward.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.NORTH, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -63,7 +63,7 @@ class ActionTest {
         Rover rover = new Rover(Direction.NORTH, new Position(0, 0));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = right.perform(rover, landscape);
+        Rover result = right.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.EAST, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -74,7 +74,7 @@ class ActionTest {
         Rover rover = new Rover(Direction.NORTH, new Position(0, 0));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = left.perform(rover, landscape);
+        Rover result = left.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.WEST, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -85,7 +85,7 @@ class ActionTest {
         Rover rover = new Rover(Direction.SOUTH, new Position(1, 0));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = forward.perform(rover, landscape);
+        Rover result = forward.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.SOUTH, new Position(1, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -96,7 +96,7 @@ class ActionTest {
         Rover rover = new Rover(Direction.WEST, new Position(0, 1));
         Landscape landscape = new Landscape(2, new ArrayList<>());
 
-        Rover result = backward.perform(rover, landscape);
+        Rover result = backward.perform(rover, landscape, 0);
         Rover expected = new Rover(Direction.WEST, new Position(0, 1));
         assertEquals(expected, result, "Rover should be equal");
     }
@@ -108,10 +108,37 @@ class ActionTest {
         List<Position> stones = new ArrayList<>();
         stones.add(new Position(1, 0));
         Landscape landscape = new Landscape(2, stones);
-        forward.perform(rover, landscape);
+        forward.perform(rover, landscape, 0);
         List<Position> result = Action.getListOfDetectedStones();
         List<Position> expected = new ArrayList<Position>();
         expected.add(new Position(1, 0));
         assertEquals(expected, result, "Stones should be at the same position");
+    }
+
+    @Test
+    void getOvercomeStonePositionWhenPerformForwardToInAccessibleField() {
+        Action forward = Action.FORWARD;
+        Rover rover = new Rover(Direction.SOUTH, new Position(0, 0));
+        List<Position> stones = new ArrayList<>();
+        stones.add(new Position(1, 0));
+        Landscape landscape = new Landscape(2, stones);
+        forward.perform(rover, landscape, 1);
+        List<Position> result = Action.getListOfOvecomedStones();
+        List<Position> expected = new ArrayList<Position>();
+        expected.add(new Position(1, 0));
+        assertEquals(expected, result, "Stones should be overcome");
+    }
+
+    @Test
+    void performForwardToInAccessibleFieldWhenOvercoming() {
+        Action forward = Action.FORWARD;
+        Rover rover = new Rover(Direction.SOUTH, new Position(0, 0));
+        List<Position> stones = new ArrayList<>();
+        stones.add(new Position(1, 0));
+        Landscape landscape = new Landscape(2, stones);
+
+        Rover result = forward.perform(rover, landscape, 1);
+        Rover expected = new Rover(Direction.SOUTH, new Position(1, 0));
+        assertEquals(expected, result, "Rover should overcome");
     }
 }

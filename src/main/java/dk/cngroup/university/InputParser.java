@@ -53,6 +53,14 @@ public class InputParser {
         return commands;
     }
 
+    public static int parseNumberOfOvercomingFields(List<String> rows) {
+        int number = 0;
+        if (rows.size() == 7) {
+            number = Integer.valueOf(rows.get(6));
+        }
+        return number;
+    }
+
     private static Position getPosition(String stringPosition) {
         List<String> coordinates = parseStringToList(stringPosition, ",");
         int x = Integer.valueOf(coordinates.get(0));

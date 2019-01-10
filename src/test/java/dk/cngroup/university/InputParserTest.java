@@ -160,7 +160,39 @@ class InputParserTest {
                 "Actions should be the same");
     }
 
+    @Test
+    void testParseOvercomingFields() {
+        List<String> input = new ArrayList<>();
+        input.add("0,1");
+        input.add("W");
+        input.add("2");
+        input.add("0,0");
+        input.add("1,1");
+        input.add("RRFLFRFF");
+        input.add("2");
 
+        int expected = 2;
+        int result = InputParser.parseNumberOfOvercomingFields(input);
 
+        assertEquals(expected, result,
+                "Numbers should be the same");
+    }
+
+    @Test
+    void testParseOvercomingFieldsWithNoRow() {
+        List<String> input = new ArrayList<>();
+        input.add("0,1");
+        input.add("W");
+        input.add("2");
+        input.add("0,0");
+        input.add("1,1");
+        input.add("RRFLFRFF");
+
+        int expected = 0;
+        int result = InputParser.parseNumberOfOvercomingFields(input);
+
+        assertEquals(expected, result,
+                "Numbers should be the same");
+    }
 
 }

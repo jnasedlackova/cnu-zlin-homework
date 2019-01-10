@@ -12,6 +12,7 @@ public class Solver {
         Landscape landscape = InputParser.parseLandscape(rows);
         Position finalDestination = InputParser.parseFinalDestination(rows);
         List<Action> commands = InputParser.parseCommands(rows);
+        int numberOfOvercomingFields = InputParser.parseNumberOfOvercomingFields(rows);
 
         finalDestination = checkPosition(landscape, finalDestination, "final destination");
         Position roverPosition = checkPosition(landscape, rover.getPosition(), "initial position of rover");
@@ -20,7 +21,7 @@ public class Solver {
 
         for (int i = 0; i < commands.size(); i++) {
             Action action = commands.get(i);
-            rover = action.perform(rover, landscape);
+            rover = action.perform(rover, landscape, numberOfOvercomingFields);
         }
 
         if (rover.getPosition().equals(finalDestination)) {
@@ -32,6 +33,10 @@ public class Solver {
 
     public static List<Position> detectedStones() {
         return Action.getListOfDetectedStones();
+    }
+
+    public static List<Position> overcomeddStones() {
+        return Action.getListOfOvecomedStones();
     }
 
     public static Position checkPosition(Landscape landscape, Position position, String string) {
