@@ -6,19 +6,19 @@ import java.util.List;
 public class InputParser {
 
     public static List<String> parseInputString(String inputString) {
-        List<String> parameters = parseStringToList(inputString, "\n");
-        return parameters;
+        List<String> rows = parseStringToList(inputString, "\n");
+        return rows;
     }
 
 
     public static Rover parseRover(List<String> rows) {
-        int x = Integer.valueOf(rows.get(0).substring(0, 1));
-        int y = Integer.valueOf(rows.get(0).substring(2, 3));
+        String stringPosition = rows.get(0);
+        Position position = getPosition(stringPosition);
         String letter = rows.get(1);
         InputDirection directionLetter = InputDirection.valueOf(letter);
         Direction direction = directionLetter.getDirectionFromLetter();
 
-        Rover rover = new Rover(direction, new Position(x, y));
+        Rover rover = new Rover(direction, position);
         return rover;
     }
 
@@ -54,21 +54,40 @@ public class InputParser {
     }
 
     private static Position getPosition(String stringPosition) {
-        int x = Integer.valueOf(stringPosition.substring(0, 1));
-        int y = Integer.valueOf(stringPosition.substring(2, 3));
+        List<String> coordinates = parseStringToList(stringPosition, ",");
+        int x = Integer.valueOf(coordinates.get(0));
+        int y = Integer.valueOf(coordinates.get(1));
         return new Position(x, y);
     }
-
 
     private static List<String> parseStringToList(String inputString, String regex) {
         List<String> outputList = new ArrayList<>();
         String[] rows = inputString.split(regex);
         for (int i = 0; i < rows.length; i++) {
             if (rows[i].length() > 0) {
-                outputList.add(rows[i]);
+                outputList.add(rows[i].trim());
             }
         }
         return outputList;
+    }
+
+    public static Position changeOutOfBoundsPosition(Position position, int landscapeSize) {
+        int x = position.x;
+        int y = position.y;
+        if (position.x < 0) {
+            x = 0;
+        }
+        if (position.x >= landscapeSize) {
+            x = landscapeSize - 1;
+        }
+        if (position.y < 0) {
+            y = 0;
+        }
+        if (position.y >= landscapeSize) {
+            y = landscapeSize - 1;
+        }
+        System.out.println("Input Coordinates out of Landscape Boundary - changed to the closest Field");
+        return new Position(x, y);
     }
 
 }

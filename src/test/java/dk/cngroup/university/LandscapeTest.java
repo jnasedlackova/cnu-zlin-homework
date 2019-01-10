@@ -27,6 +27,26 @@ class LandscapeTest {
 				"Small landscape with one stone on position 0,0 should be like this.");
 	}
 
+    @Test
+    void testCreateSmallLandscapeWithOneStoneOutOfBoundaryInY() {
+        List<Position> stones = new ArrayList<>();
+        stones.add(new Position(0, 2));
+        Landscape landscape = new Landscape(2, stones);
+        String expected = "..\n..\n";
+        assertEquals(expected, landscape.toString(),
+                "Small landscape with one stone on out of boundary position 0,2 should be like this.");
+    }
+
+    @Test
+    void testCreateSmallLandscapeWithOneStoneOutOfBoundaryInX() {
+        List<Position> stones = new ArrayList<>();
+        stones.add(new Position(-1, 0));
+        Landscape landscape = new Landscape(2, stones);
+        String expected = "..\n..\n";
+        assertEquals(expected, landscape.toString(),
+                "Small landscape with one stone on out of boundary position 5,0 should be like this.");
+    }
+
 	@Test
 	void testIsAccessible() {
 		List<Position> stones = new ArrayList<>();

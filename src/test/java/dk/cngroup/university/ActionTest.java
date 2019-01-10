@@ -78,4 +78,62 @@ class ActionTest {
         Rover expected = new Rover(Direction.WEST, new Position(0, 0));
         assertEquals(expected, result, "Rover should be equal");
     }
+
+    @Test
+    void isOutOfBoundsXminus() {
+        Position position = new Position(-1, 1);
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+        boolean result = Action.isOutOfBounds(landscape, position);
+        boolean expected = true;
+        assertEquals(expected, result, "Position is out of Boundary");
+    }
+
+    @Test
+    void isOutOfBoundsXplus() {
+        Position position = new Position(5, 1);
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+        boolean result = Action.isOutOfBounds(landscape, position);
+        boolean expected = true;
+        assertEquals(expected, result, "Position is out of Boundary");
+    }
+
+    @Test
+    void isOutOfBoundsYminus() {
+        Position position = new Position(1, -2);
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+        boolean result = Action.isOutOfBounds(landscape, position);
+        boolean expected = true;
+        assertEquals(expected, result, "Position is out of Boundary");
+    }
+
+    @Test
+    void isOutOfBoundsYplus() {
+        Position position = new Position(1, 10);
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+        boolean result = Action.isOutOfBounds(landscape, position);
+        boolean expected = true;
+        assertEquals(expected, result, "Position is out of Boundary");
+    }
+
+    @Test
+    void performForwardOutOfBoundary() {
+        Action forward = Action.FORWARD;
+        Rover rover = new Rover(Direction.SOUTH, new Position(1, 0));
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+
+        Rover result = forward.perform(rover, landscape);
+        Rover expected = new Rover(Direction.SOUTH, new Position(1, 0));
+        assertEquals(expected, result, "Rover should be equal");
+    }
+
+    @Test
+    void performBackwardOutOfBoundary() {
+        Action backward = Action.BACKWARD;
+        Rover rover = new Rover(Direction.WEST, new Position(0, 1));
+        Landscape landscape = new Landscape(2, new ArrayList<>());
+
+        Rover result = backward.perform(rover, landscape);
+        Rover expected = new Rover(Direction.WEST, new Position(0, 1));
+        assertEquals(expected, result, "Rover should be equal");
+    }
 }

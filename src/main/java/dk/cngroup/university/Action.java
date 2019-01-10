@@ -23,8 +23,11 @@ public enum Action {
 			Direction direction = rover.getDirection();
 			Position position =
 					rover.getPosition().getNeighbour(direction);
-			if (landscape.isAccessible(position)) {
-				return new Rover(direction, position);
+			boolean outOfBounds = isOutOfBounds(landscape, position);
+			if (outOfBounds == false) {
+				if (landscape.isAccessible(position)) {
+					return new Rover(direction, position);
+				}
 			}
 			return rover;
 		}
@@ -36,12 +39,22 @@ public enum Action {
             Direction opositeDirection = direction.getOpositeDirection();
             Position position =
                     rover.getPosition().getNeighbour(opositeDirection);
-            if (landscape.isAccessible(position)) {
-                return new Rover(direction, position);
-            }
+			boolean outOfBounds = isOutOfBounds(landscape, position);
+			if (outOfBounds == false) {
+				if (landscape.isAccessible(position)) {
+					return new Rover(direction, position);
+				}
+			}
             return rover;
 		}
 	};
 
 	public abstract Rover perform(Rover rover, Landscape landscape);
+
+	public static boolean isOutOfBounds(Landscape landscape, Position position) {
+		if (position.x >= landscape.getFields().length || position.y >= landscape.getFields().length
+				|| position.x < 0 || position.y < 0) {
+			return true;
+		} else return false;
+	}
 }

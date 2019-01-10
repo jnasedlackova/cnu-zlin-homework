@@ -31,7 +31,9 @@ public class Landscape {
 
 	private void insertInaccessibleFields(List<Position> inaccessiblePositions) {
 		for (Position p : inaccessiblePositions) {
-			fields[p.x][p.y] = Field.INACCESSIBLE;
+            if (p.x < fields.length && p.y < fields.length && p.x > -1 && p.y > -1) {
+                fields[p.x][p.y] = Field.INACCESSIBLE;
+            }
 		}
 	}
 
@@ -43,4 +45,8 @@ public class Landscape {
 			}
 		}
 	}
+
+    public Field[][] getFields() {
+        return fields;
+    }
 }
