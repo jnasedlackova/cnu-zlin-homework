@@ -26,6 +26,30 @@ public class Position {
 		}
 	}
 
+    public static Position changeOutOfBoundsPosition(Position position, int landscapeSize, String string) {
+        int x = position.x;
+        int y = position.y;
+        if (x < 0) {
+            x = 0;
+        } else if (x >= landscapeSize) {
+            x = landscapeSize - 1;
+        }
+        if (y < 0) {
+            y = 0;
+        } else if (y >= landscapeSize) {
+            y = landscapeSize - 1;
+        }
+        System.out.println("Coordinates of " + string + " out of Landscape Boundary - changed to the closest Field");
+        return new Position(x, y);
+    }
+
+    public static boolean isOutOfBounds(Landscape landscape, Position position) {
+        if (position.x >= landscape.getFields().length || position.y >= landscape.getFields().length
+                || position.x < 0 || position.y < 0) {
+            return true;
+        } else return false;
+    }
+
 	@Override
 	public String toString() {
 		return "Position{" +

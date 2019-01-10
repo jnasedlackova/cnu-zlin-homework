@@ -160,21 +160,6 @@ class InputParserTest {
                 "Actions should be the same");
     }
 
-    @Test
-    void changeOutOfBoundsPositionXminusYplus() {
-        Position position = new Position(-2, 10);
-        Position result = InputParser.changeOutOfBoundsPosition(position, 5);
-        Position expected = new Position(0, 4);
-        assertEquals(expected, result, "Positions should be equal");
-    }
-
-    @Test
-    void changeOutOfBoundsPositionXplusYminus() {
-        Position position = new Position(20, -5);
-        Position result = InputParser.changeOutOfBoundsPosition(position, 10);
-        Position expected = new Position(9, 0);
-        assertEquals(expected, result, "Positions should be equal");
-    }
 
 
 

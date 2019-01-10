@@ -13,15 +13,10 @@ public class Solver {
         Position finalDestination = InputParser.parseFinalDestination(rows);
         List<Action> commands = InputParser.parseCommands(rows);
 
-        if (Action.isOutOfBounds(landscape, finalDestination)) {
-            finalDestination = InputParser.changeOutOfBoundsPosition(finalDestination, landscape.getFields().length);
-        }
+        finalDestination = checkPosition(landscape, finalDestination, "final destination");
+        Position roverPosition = checkPosition(landscape, rover.getPosition(), "initial position of rover");
+        rover = new Rover(rover.getDirection(), roverPosition);
 
-        if (Action.isOutOfBounds(landscape, rover.getPosition())) {
-            Position position = InputParser.changeOutOfBoundsPosition(finalDestination, landscape.getFields().length);
-            Direction direction = rover.getDirection();
-            rover = new Rover(direction, position);
-        }
 
         for (int i = 0; i < commands.size(); i++) {
             Action action = commands.get(i);
@@ -33,5 +28,19 @@ public class Solver {
         }
 
         return result;
+    }
+
+    public static List<Position> detectedStones() {
+        return Action.getListOfDetectedStones();
+    }
+
+    public static Position checkPosition(Landscape landscape, Position position, String string) {
+        if (Position.isOutOfBounds(landscape, position)) {
+            position = Position.changeOutOfBoundsPosition(position, landscape.getFields().length, string);
+        }
+        if (!landscape.isAccessible(position)) {
+            System.out.println("WARNING: " + string + " is at inaccessible Field");
+        }
+        return position;
     }
 }

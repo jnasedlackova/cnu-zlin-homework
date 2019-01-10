@@ -70,24 +70,4 @@ public class InputParser {
         }
         return outputList;
     }
-
-    public static Position changeOutOfBoundsPosition(Position position, int landscapeSize) {
-        int x = position.x;
-        int y = position.y;
-        if (position.x < 0) {
-            x = 0;
-        }
-        if (position.x >= landscapeSize) {
-            x = landscapeSize - 1;
-        }
-        if (position.y < 0) {
-            y = 0;
-        }
-        if (position.y >= landscapeSize) {
-            y = landscapeSize - 1;
-        }
-        System.out.println("Input Coordinates out of Landscape Boundary - changed to the closest Field");
-        return new Position(x, y);
-    }
-
 }

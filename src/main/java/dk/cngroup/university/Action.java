@@ -1,5 +1,8 @@
 package dk.cngroup.university;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Action {
 	RIGHT{
 		@Override
@@ -23,13 +26,7 @@ public enum Action {
 			Direction direction = rover.getDirection();
 			Position position =
 					rover.getPosition().getNeighbour(direction);
-			boolean outOfBounds = isOutOfBounds(landscape, position);
-			if (outOfBounds == false) {
-				if (landscape.isAccessible(position)) {
-					return new Rover(direction, position);
-				}
-			}
-			return rover;
+            return getRover(rover, landscape, direction, position);
 		}
 	},
 	BACKWARD {
@@ -39,22 +36,28 @@ public enum Action {
             Direction opositeDirection = direction.getOpositeDirection();
             Position position =
                     rover.getPosition().getNeighbour(opositeDirection);
-			boolean outOfBounds = isOutOfBounds(landscape, position);
-			if (outOfBounds == false) {
-				if (landscape.isAccessible(position)) {
-					return new Rover(direction, position);
-				}
-			}
-            return rover;
+            return getRover(rover, landscape, direction, position);
 		}
 	};
 
+    static List<Position> listOfDetectedStones = new ArrayList<>();
+
+    public static List<Position> getListOfDetectedStones() {
+        return listOfDetectedStones;
+    }
+
 	public abstract Rover perform(Rover rover, Landscape landscape);
 
-	public static boolean isOutOfBounds(Landscape landscape, Position position) {
-		if (position.x >= landscape.getFields().length || position.y >= landscape.getFields().length
-				|| position.x < 0 || position.y < 0) {
-			return true;
-		} else return false;
+    public Rover getRover(Rover rover, Landscape landscape, Direction direction, Position position) {
+        boolean outOfBounds = Position.isOutOfBounds(landscape, position);
+        if (outOfBounds == false) {
+            if (landscape.isAccessible(position)) {
+                return new Rover(direction, position);
+            } else {
+                listOfDetectedStones.add(position);
+                return rover;
+            }
+        }
+        return rover;
 	}
 }
