@@ -1,8 +1,20 @@
 package dk.cngroup.university;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Solver {
+
+    static List<Position> roverMovement = new ArrayList<>();
+    static GraficField[][] graficFields; // = new GraficField[][];
+
+    public static List<Position> getRoverMovement() {
+        return roverMovement;
+    }
+
+    public static GraficField[][] getGraficFields() {
+        return graficFields;
+    }
 
     public static boolean solve(String input) {
 
@@ -17,16 +29,20 @@ public class Solver {
         finalDestination = checkPosition(landscape, finalDestination, "final destination");
         Position roverPosition = checkPosition(landscape, rover.getPosition(), "initial position of rover");
         rover = new Rover(rover.getDirection(), roverPosition);
-
+        Position initialPosition = roverPosition;
 
         for (int i = 0; i < commands.size(); i++) {
             Action action = commands.get(i);
             rover = action.perform(rover, landscape, numberOfOvercomingFields);
+            roverMovement.add(rover.getPosition());
         }
 
         if (rover.getPosition().equals(finalDestination)) {
             result = true;
         }
+
+        GraficPrint graficPrint = new GraficPrint(landscape.getFields().length, landscape, finalDestination, initialPosition, roverMovement);
+        graficFields = graficPrint.getFields();
 
         return result;
     }
@@ -48,4 +64,5 @@ public class Solver {
         }
         return position;
     }
+
 }

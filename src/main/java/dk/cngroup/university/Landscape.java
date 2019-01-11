@@ -3,7 +3,7 @@ package dk.cngroup.university;
 import java.util.List;
 
 public class Landscape {
-	private Field[][] fields;
+	private static Field[][] fields;
 
 	public Landscape(int size, List<Position> inaccessiblePositions) {
 		initAccessibleLandscape(size);
